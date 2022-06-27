@@ -36,20 +36,20 @@
    <div class="text-center container p-5">
          <h3 class="display-4">Pesquisar na api</h3>
    	  <form class="form center">
-   	  	<input id="search" class="form-control" type="text" name="search" placeholder="Digite o ncm antigo">
+   	  	<input id="search" class="form-control" type="text" name="search" placeholder="Digite o ncm antigo, sem pontos, apenas números">
    	  	<input id="button" class="btn btn-primary text light form-control" type="submit" name="" value="Buscar">
    	  </form>
 
-   	  <div id="content" class="container">
-   	  	<h4 id="number" class="p-5">
-   	  		Pesquisar por Novo Ncm
-   	  	</h4>
+   	  <div id="content" class="container p-4">
+   	  	  <h4 id="text">Pesquisar por Novo Ncm</h4>
+           <div id="ncms" class="p-5">
+   	  	  </div>
    	  </div>
    </div>
 
 
    <script>
-   	 /*   let bt = document.getElementById("button")
+   	    let bt = document.getElementById("button")
    	    let field = document.getElementById("search")
    	     bt.addEventListener("click", function(event){
          event.preventDefault()
@@ -57,19 +57,26 @@
 
          $.ajax({
         type: 'GET',
-        url: "https://flask-api-gp.herokuapp.com/"+field.value,
+        url: "https://consulta-ncm.herokuapp.com/"+field.value,
         error: function (jqXHR, textStatus, errorThrown) {
-             document.getElementById("number").innerHTML = "GP não encontrada, verifique se digitou corretamente"
+             document.getElementById("text").innerText = "Relação com esse ncm não encontrada, verifique se digitou corretamente"
         },
         success: function (data) {
            let size = data.length
-           console.log(data)
-           document.getElementById("number").innerHTML = "Numero da "+ data.name+ ": "
-           document.getElementById("number").innerHTML +=  data.number 
+           document.getElementById("text").innerText = ""
+           document.getElementById("text").innerText = "O(s) novo(s) codigo(s) para o ncm "+field.value + " são:"
+           document.getElementById("ncms").innerHTML = ""
+           
+           for(let pos = 0; pos < size; pos++)
+           {
+             let code = "<h4>"+data[pos].code+"<h4>"      
+             document.getElementById("ncms").innerHTML += code
+           }
+           
         }
     });
 });
-*/
+
    </script>
 </body>
 </html>
