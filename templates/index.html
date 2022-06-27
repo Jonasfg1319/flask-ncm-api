@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Api Consulta Ncms</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+   <header class="p-4 bg-primary text-light text-center">
+   	   <h2>API Consulta NCMs</h2>
+   </header>
+
+   <div class="container">
+        <div class="center">
+          <div class="row">
+            <div class="col-md-4 btn ">
+                 Sobre
+            </div>
+            <div class="col-md-4 btn ">
+                 Documentação
+            </div>
+            <div class="col-md-4 btn ">
+                 Contato
+            </div>
+         </div>
+       </div>
+   </div>
+   
+
+   <div class="text-center container p-5">
+         <h3 class="display-4">Pesquisar na api</h3>
+   	  <form class="form center">
+   	  	<input id="search" class="form-control" type="text" name="search" placeholder="Digite o ncm antigo">
+   	  	<input id="button" class="btn btn-primary text light form-control" type="submit" name="" value="Buscar">
+   	  </form>
+
+   	  <div id="content" class="container">
+   	  	<h4 id="number" class="p-5">
+   	  		Pesquisar por Novo Ncm
+   	  	</h4>
+   	  </div>
+   </div>
+
+
+   <script>
+   	 /*   let bt = document.getElementById("button")
+   	    let field = document.getElementById("search")
+   	     bt.addEventListener("click", function(event){
+         event.preventDefault()
+         
+
+         $.ajax({
+        type: 'GET',
+        url: "https://flask-api-gp.herokuapp.com/"+field.value,
+        error: function (jqXHR, textStatus, errorThrown) {
+             document.getElementById("number").innerHTML = "GP não encontrada, verifique se digitou corretamente"
+        },
+        success: function (data) {
+           let size = data.length
+           console.log(data)
+           document.getElementById("number").innerHTML = "Numero da "+ data.name+ ": "
+           document.getElementById("number").innerHTML +=  data.number 
+        }
+    });
+});
+*/
+   </script>
+</body>
+</html>
