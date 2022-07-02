@@ -93,7 +93,7 @@ for i in range(len(array)):
 	count+=1
 
 
-
+#test
 s = input("Digite o codigo antigo que vc quer pesquisar")
 
 data_ncm = NcmNewModel.query.join(NcmOldModel, NcmOldModel.id==NcmNewModel.old_id) \

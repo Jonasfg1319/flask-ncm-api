@@ -66,3 +66,12 @@ def search_relathionship(code):
 	data_ncm = NcmNewModel.query.join(NcmOldModel, NcmOldModel.id==NcmNewModel.old_id).where(NcmOldModel.code == code).order_by(NcmOldModel.id).all()
 	results = [{ "id" : ncm.id,"code" : ncm.code } for ncm in data_ncm]
 	return jsonify(results)
+
+@app.route("/docs")
+def docs():
+	return render_template("doc.html")
+
+
+@app.route("/sobre")
+def about():
+	return render_template("sobre.html")
