@@ -2,14 +2,16 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
+#conecatando ao banco de dados 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://mqikusitjpynqg:e42dea1a5eb3e68cc4e54ee5bf0341be5a5ee73e2ce90182cb965a11a518210a@ec2-44-197-128-108.compute-1.amazonaws.com:5432/daq2vrbklcvea0'
+app.config["SQLALCHEMY_DATABASE_URI"] = '[String de conexao do postgresql]'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+#declarando a variavel db e a variavel de migração para o banco de dados
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-
+#models
 class NcmOldModel(db.Model):
   __tablename__ = 'old_ncm'
   id = db.Column(db.Integer, primary_key=True)
@@ -31,12 +33,13 @@ class NcmNewModel(db.Model):
    self.code = code
    self.old_id = old_id
 
-
+#abrindo o arqui ncms txt e criando os arrays de apoio
 f = open("ncms.txt", "r")
 array = []
 array_temp = []
 c = 0
 
+#lendo o arquivo ncms.txt e separando em arrays com 1 antigo e seus respectivos novos
 for l in f.readlines():
 	c += 1
 	linha = l.split(" ")
@@ -45,7 +48,6 @@ for l in f.readlines():
 	linha = []
 	linha.append(temp1)
 	linha.append(temp2)
-	#print(f"Minha linha é {linha}")
 	if(c == 1):
 		array_temp = linha
 		array.append(array_temp)
@@ -56,15 +58,37 @@ for l in f.readlines():
 	   else:
 	     array_temp.append(linha[1])
 
+
+#criando dicionario para agrupar todos os subgrupos de ncms
 dic = dict()
 count = 1
 c2 = 1
 
 
-
+#dicionario de novos e antigos ncms
 table_old = dict()
 table_new = dict()
 
+
+
+'''
+
+O que o código a seguir faz? 
+
+Pega cada lista de array da tabela array e cria um dicionario para cada item da subtabela.
+Para facilitar a inserção no banco de dados os ncms antigos e novos, os dados são inseridos quase simultaneamente.
+
+O for mais externo lê os ncms antigos e coloca no dicionario "table_old"
+
+O for mais interno lê os ncms novos e coloca no dicionario "table_new", com a diferença que no campo
+"id_antigo" é colocado o valor da variavel "count"
+
+O valor da variavel count é o mesmo valor do ncm do for mais externo, por isso a relação bate. 
+A "count" está sendo incrementada com base nos ncms antigos
+
+'''
+
+#acessando o array com todos os grupos de ncms e fazendo o apontamento entre os ncms
 for i in range(len(array)):
 	ncms_old = dict()
 	novos = []
